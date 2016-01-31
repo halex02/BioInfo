@@ -1,3 +1,4 @@
+const fasta = require('./lib/fasta.js') ;
 
 const errorLength = new Error(" Erreur\n Paramètre insufisant.\n") ;
 
@@ -8,11 +9,11 @@ if (argv.length < 3)
 
 switch(argv[2]){
 case "print-fasta-sequences" :
-    print-fasta-sequences(argv[3]);
+    fasta.printFastaSequences(argv[3]);
     break ;
     
 case "print-fasta-stats" :
-    print-fasta-stats(argv[3]);
+    fasta.printFastaStats(argv[3]);
     break ;
     
 case "random-mutations" :
