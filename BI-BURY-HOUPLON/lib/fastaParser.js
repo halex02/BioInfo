@@ -45,3 +45,8 @@ exports.fastaFileToJsonFile = function(path1, path2){
 	console.log('Fichier JSON sauvegardé.\n') ;
     }) ;
 }
+
+exports.jsonFileToJsonObject = function (path) {
+    var json_string = fs.readFileSync(path, 'ascii') ;
+    return JSON.parse(json_string) ;
+}
