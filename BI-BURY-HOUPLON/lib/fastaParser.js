@@ -10,7 +10,7 @@ exports.fastaStringToJsonString = function (str) {
 }
 
 
-
+//à partir du path d'un fichier.fasta, le traduit en JSON, sous la forme d'un String, séparant chaque séquence.
 exports.fastaFileToJsonString = function (path) {
     var sequences_string = fs.readFileSync(path, 'ascii') ; 
     var sequences_array = sequences_string.split('>') ;
@@ -33,10 +33,12 @@ exports.fastaFileToJsonString = function (path) {
     return aux(sequences_array, '') ;
 }
 
+//à partir du path d'un fichier.fasta, le traduit en JSON séparant chaque séquence.
 exports.fastaFileToJsonObject = function (path){
     return JSON.parse(exports.fastaFileToJsonString(path)) ;
 }
 
+//à partir du path1 d'un fichier.fasta, crée un fichier.json au path2 séparant chaque séquence.
 exports.fastaFileToJsonFile = function(path1, path2){
     var json_string = exports.fastaFileToJsonString(path1) ;
     fs.writeFile(path2, json_string, (err) => {
@@ -46,6 +48,7 @@ exports.fastaFileToJsonFile = function(path1, path2){
     }) ;
 }
 
+//à partir du path d'un fichier.json, retourne l'objet JSON.
 exports.jsonFileToJsonObject = function (path) {
     var json_string = fs.readFileSync(path, 'ascii') ;
     return JSON.parse(json_string) ;
