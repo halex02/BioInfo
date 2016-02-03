@@ -29,7 +29,7 @@ var randomMutation= function (i, path) {
 	if(i == 1)
 	    return muteUneFois(seq, func) ;
 	else
-	    return muteNFois(muteUneFois(seq, func, i-1) ;
+	    return muteNFois(muteUneFois(seq, func), func, i-1) ;
     } ;
 
 	var mutated_sequence = muteNFois(json_sequence.sequences[0].sequence,
