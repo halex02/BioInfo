@@ -33,3 +33,8 @@ exports.printMutation = function (i, path) {
     console.log('>'+json_mutated.sequences[0].id) ;
     console.log(json_mutated.sequences[0].sequence+'\n') ;
 }
+
+exports.exportMutation = function (i, path1, path2) {
+    json_mutated = randomMutation (i, path1) ;
+    parser.jsonObjectToFastaFile(json_mutated) ;
+}

@@ -52,3 +52,18 @@ exports.jsonFileToJsonObject = function (path) {
     var json_string = fs.readFileSync(path, 'ascii') ;
     return JSON.parse(json_string) ;
 }
+
+exports.jsonObjectToFastaFile = function(json, path) {
+    var res = '' ;
+    
+    var aux = function(json){
+	var id = '>'+json.id+'\n' ;
+	var seq =json.seq ;
+	return id+seq ;
+    }
+
+    for (var i = 0 ; i < json.sequences.length ; i++)
+	res+= aux(json.sequences[i])+'\n' ;
+    return res ;
+    
+}

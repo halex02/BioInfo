@@ -50,3 +50,13 @@ done
 
 #On constate que ebola-z est plus proche de son 'cousin' que de phage-lambda
 #On constate également que plus la taille des kmers est importante, plus l'écart entre les ratio l'est également.
+
+#Question 10 :
+echo "Question 10 :"
+echo "test sur la séquence test1 (4 itérations) :"
+for i in 1..4
+do
+    node bioseq random-mutations 2 data/test1.fasta
+done
+
+
