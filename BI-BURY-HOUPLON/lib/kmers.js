@@ -55,3 +55,4 @@ exports.printCommonKmers = function (l, path1, path2) {
 exports.printCommonKmersRatio = function (l, path1, path2) {
     console.log(commonKmersRatio(l, path1, path2)+'\n') ;
 }
+
