@@ -1,5 +1,6 @@
 const parser = require('./fastaParser.js') ;
 const random = require('./random.js') ;
+const fw = require('./fileWriter.js');
 
 /*
  * randomMutation(i, path) : récupère le contenu d'un fichier fasta et fait subir à la chaine de nucléotide
@@ -26,11 +27,16 @@ var randomMutation= function (i, path) {
      * fonction auxiliaire qui applique 'i' fois la mutation définie par la fonction 'func' sur la séquence 'seq'.
      */
     var muteNFois = function (seq, func, i) {
-	if(i == 1)
-	    return muteUneFois(seq, func) ;
-	else
-	    return muteNFois(muteUneFois(seq, func), func, i-1) ;
-    } ;
+        var ret = seq;
+        for (var j = 0; j < i; j++) {
+            ret = muteUneFois(ret,func);
+        };
+	// if(i == 1)
+	//     return muteUneFois(seq, func) ;
+	// else
+	//     return muteNFois(muteUneFois(seq, func), func, i-1) ;
+    }
+    ;
 
 	var mutated_sequence = muteNFois(json_sequence.sequences[0].sequence,
 					 function(nucl, pattern){return pattern.replace(nucl, '')[random.randomInt(0, 2)];},
