@@ -98,6 +98,6 @@ exports.jsonObjectToFastaFile = function(json, path) {
 
     for (var i = 0 ; i < json.sequences.length ; i++)
 	res+= aux(json.sequences[i])+'\n' ;
-    return res ;
+    fs.writeFile(path, res) ;
     
 }
