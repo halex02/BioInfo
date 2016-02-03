@@ -4,8 +4,7 @@ exports.fastaStringToJsonString = function (str) {
     var del_index = str.indexOf('\n') ;
     var fasta_id = str.substring(0, del_index) ;
     var fasta_sequence = str.substr(del_index+1).replace(/\n/g,'') ;
-    var length_sequence = fasta_sequence.length ;
-    var json_string = '{"id": "'+fasta_id+'",\n"sequence": "'+fasta_sequence+'",\n"length": '+length_sequence+'}' ;
+    var json_string = '{"id": "'+fasta_id+'",\n"sequence": "'+fasta_sequence+'"}' ;
     return json_string ;
 }
 
