@@ -30,10 +30,7 @@ var randomMutation= function (i, path) {
         for (var j = 0; j < i; j++) {
             ret = muteUneFois(ret,func);
         };
-	// if(i == 1)
-	//     return muteUneFois(seq, func) ;
-	// else
-	//     return muteNFois(muteUneFois(seq, func), func, i-1) ;
+        return ret;
     }
     ;
 
