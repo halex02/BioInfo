@@ -1,6 +1,5 @@
 const parser = require('./fastaParser.js') ;
 const random = require('./random.js') ;
-const fw = require('./fileWriter.js');
 
 /*
  * randomMutation(i, path) : récupère le contenu d'un fichier fasta et fait subir à la chaine de nucléotide
