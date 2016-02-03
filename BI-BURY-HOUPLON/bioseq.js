@@ -51,7 +51,7 @@ case 'ratio-common-kmers' :
     break ;
     
 case 'random-mutations' :
-    mutation.randomMutations(argv[3], argv[4]) ; //cf. mutation.js
+    mutation.printMutation(argv[3], argv[4]) ; //cf. mutation.js
     break ;
 
 default:
