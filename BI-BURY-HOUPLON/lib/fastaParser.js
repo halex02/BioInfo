@@ -40,7 +40,7 @@ exports.fastaFileToJsonObject = function (path){
 //à partir du path1 d'un fichier.fasta, crée un fichier.json au path2 séparant chaque séquence.
 exports.fastaFileToJsonFile = function(path1, path2){
     var json_string = exports.fastaFileToJsonString(path1) ;
-    fs.writeFile(path2, json_string, (err) => {
+    fs.writeFile(path2, json_string, function(err){
 	if (err)
 	    throw err ;
 	console.log('Fichier JSON sauvegardé.\n') ;

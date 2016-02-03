@@ -41,6 +41,7 @@ exports.printListKmers = function(l, path) {
 
     for (var i = 0 ; i < kmers.length ; i++)
 	console.log(kmers[i]) ;
+    console.log('\n') ;
 }
 
 exports.printCommonKmers = function (l, path1, path2) {
@@ -48,8 +49,9 @@ exports.printCommonKmers = function (l, path1, path2) {
 
     for(var i = 0 ; i < common.length ; i++)
 	console.log(common[i]) ;
+    console.log('\n') ;
 }
 
 exports.printCommonKmersRatio = function (l, path1, path2) {
-    console.log(commonKmersRatio(l, path1, path2)) ;
+    console.log(commonKmersRatio(l, path1, path2)+'\n') ;
 }
