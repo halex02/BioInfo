@@ -5,6 +5,7 @@
 const fasta = require('./lib/fasta.js') ; //partie 1
 const kmers = require('./lib/kmers.js') ; //partie 2
 const mutation = require('./lib/mutation.js') ; //partie 3
+const windows = require('./lib/windows.js') ;
 
 /*
  * Erreur renvoyée si le tableau argv ne contient pas un nombre suffisant de paramètre.
@@ -54,6 +55,10 @@ case 'random-mutations' :
     mutation.printMutation(argv[3], argv[4]) ; //cf. mutation.js
     break ;
 
+case 'windows' :
+    windows.printWindows(argv[3], argv[4], argv[5]) ;
+    break ;
+    
 default:
     console.log(errorUnknownCommand.message) ; //si l'utilisateur s'amuse à écrire n'importe quoi en paramètre, le programme plante.
 }
