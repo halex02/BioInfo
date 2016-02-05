@@ -1,6 +1,6 @@
 const parser = require('./fastaParser.js') ;
 
-var arrayOfKmers = function (l, path) {
+exports.arrayOfKmers = function (l, path) {
     var json_sequences =  parser.fastaFileToJsonObject(path) ;
     var kmers_array = [] ;
     
