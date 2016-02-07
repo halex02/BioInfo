@@ -1,25 +1,41 @@
 const parser = require('./fastaParser.js') ;
-
-exports.arrayOfKmers = function (l, path) {
-    var json_sequences =  parser.fastaFileToJsonObject(path) ;
-    var kmers_array = [] ;
-    
-    var aux = function (seq, i, arr) {
-	var index_debut = 0 ;
-	var index_fin = i ;
-	
-	while(index_fin <= seq.length)
-	    arr.push(seq.slice(index_debut++, index_fin++)) ;
-    } ;
-
-    for(var i = 0 ; i < json_sequences.sequences.length ; i++)
-	aux(json_sequences.sequences[i].sequence, l, kmers_array);
-    return kmers_array ;
+const graine = require('./graine.js') ;
+const array = require('./array.js') ;
+/*
+ * sequenceToKmers(seq, regex, n) : prend une séquence de nucléotides, une regex pour la filtrer, la "taille" de la regex (que l'on peut obtenir,
+ * comme la regex, à partir de la graine (il suffit de supprimer tous les '-' de la seed et de récupérer la longueur
+ * de cette chaine), pour renvoyer un tableau de kmers.
+ */
+exports.sequenceToKmers = function(seq, regex, n) {
+    var res = new Array(n) ;
+    var j = 0 ;
+    while (regex.lastIndex <= seq.length-n) {
+	var traitement = regex.exec(seq) ;
+	res[j]='';
+	for (var i = 1 ; i <= n ; i++) {
+	    res[j]+=traitement[i] ;
+	}
+	regex.lastIndex = traitement.index+1 ;
+	j++ ;
+    }
+    return res ;
 }
 
-var commonKmersArray = function (l, path1, path2) {
-    var kmers1 = arrayOfKmers(l, path1) ;
-    var kmers2 = arrayOfKmers(l, path2) ;
+exports.arrayOfKmersBySeed = function(s, json) {
+    var json_sequences =  json.sequences.map(function(json){return json.sequence ;}) ;
+    var kmers_matrix = json_sequences.map(function(seq){return exports.sequenceToKmers(seq,
+										       graine.seedToRegex(s, graine.traduire),
+										       s.replace(/-/g, '').length)}) ;
+    return array.matrixToArray(kmers_matrix) ;
+}
+
+exports.arrayOfKmersByLength = function (l, json) {
+    return exports.arrayOfKmersBySeed('#'.repeat(l), json) ;
+}
+
+exports.commonKmersArray = function (l, json1, json2) {
+    var kmers1 = exports.arrayOfKmersByLength(l, json1) ;
+    var kmers2 = exports.arrayOfKmersByLength(l, json2) ;
     var common = [] ;
     
     for (var i = 0 ; i < kmers1.length ; i++)
@@ -28,31 +44,31 @@ var commonKmersArray = function (l, path1, path2) {
     return common ;
 }
 
-var commonKmersRatio = function (l, path1, path2) {
-    var kmers2 = arrayOfKmers(l, path2) ;
-    var common = commonKmersArray(l, path1, path2) ;
+exports.commonKmersRatio = function (l, json1, json2) {
+    var kmers2 = exports.arrayOfKmersByLength(l, json2) ;
+    var common = exports.commonKmersArray(l, json1, json2) ;
 
     return (common.length)/(kmers2.length) ;
 }
 
 
-exports.printListKmers = function(l, path) {
-    var kmers = arrayOfKmers(l, path) ;
-
+exports.printListKmers = function(l, json) {
+    var kmers = exports.arrayOfKmersByLength(l, json) ;
+    
     for (var i = 0 ; i < kmers.length ; i++)
 	console.log(kmers[i]) ;
     console.log('\n') ;
 }
 
-exports.printCommonKmers = function (l, path1, path2) {
-    var common = commonKmersArray(l, path1, path2) ;
+exports.printCommonKmers = function (l, json1, json2) {
+    var common = exports.commonKmersArray(l, json1, json2) ;
 
     for(var i = 0 ; i < common.length ; i++)
 	console.log(common[i]) ;
     console.log('\n') ;
 }
 
-exports.printCommonKmersRatio = function (l, path1, path2) {
-    console.log(commonKmersRatio(l, path1, path2)+'\n') ;
+exports.printCommonKmersRatio = function (l, json1, json2) {
+    console.log(exports.commonKmersRatio(l, json1, json2)+'\n') ;
 }
 
