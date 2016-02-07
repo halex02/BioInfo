@@ -6,14 +6,14 @@ const motif = '#-' ;
 /*
  * Erreur retourné en cas de graine non conforme.
  */
-const erreurMotif = new Error("caractère invalide dans la graine.\n") ;
+const errorPattern = new Error("caractère invalide dans la graine.\n") ;
 
 /*
- * traduire(c) : traduit le caractère 'c' d'une graine en chaine convertible en RegExp.
+ * translate(c) : traduit le caractère 'c' d'une graine en chaine convertible en RegExp.
  */
-exports.traduire = function(c) {
+exports.translate = function(c) {
     if ( motif.indexOf(c) == (-1)) {
-	throw erreurMotif ;
+	throw errorPattern ;
     }else if (motif.indexOf(c) == 0) {
 	return '(.)' ; //Correspond à un nucléotide non filtré
     }else{

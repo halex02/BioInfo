@@ -1,6 +1,7 @@
 const parser = require('./fastaParser.js') ;
-const graine = require('./graine.js') ;
+const seed = require('./graine.js') ;
 const array = require('./array.js') ;
+
 /*
  * sequenceToKmers(seq, regex, n) : prend une séquence de nucléotides, une regex pour la filtrer, la "taille" de la regex (que l'on peut obtenir,
  * comme la regex, à partir de la graine (il suffit de supprimer tous les '-' de la seed et de récupérer la longueur
@@ -21,17 +22,32 @@ exports.sequenceToKmers = function(seq, regex, n) {
     return res ;
 }
 
+/*
+ * arrayOfKmersBySeed(s, json) : génére un tableau de kmers à partir d'une graine et d'un objet JSON contenant des séquences de nucléotides.
+ */
 exports.arrayOfKmersBySeed = function(s, json) {
-    var json_sequences =  json.sequences.map(function(json){return json.sequence ;}) ;
+    var json_sequences =  json.sequences.map(function(json){return json.sequence ;}) ; //génération d'un tableau de string à partir de l'objet json
+
+    /*
+     * on mappe le tableau de séquences avec une fonction renvoyant un tableau de tableaux de kmers. 
+     */
     var kmers_matrix = json_sequences.map(function(seq){return exports.sequenceToKmers(seq,
-										       graine.seedToRegex(s, graine.traduire),
-										       s.replace(/-/g, '').length)}) ;
+										       seed.seedToRegex(s, seed.translate),//création de la regex
+										       s.replace(/-/g, '').length)}) ;//détermination de la longueur des kmers
+
+    /*
+     * on renvoie le tableau précédent après avoir fusionné tous les sous-tableaux pour ne plus avoir qu'un tableau de kmers.
+     */
     return array.matrixToArray(kmers_matrix) ;
 }
 
+/*
+ * arrayOfKmersByLength(l, json) : renvoie un tableau de kmers à partir d'une longueur donné pour ceux-ci et d'un objet JSON.
+ */
 exports.arrayOfKmersByLength = function (l, json) {
     return exports.arrayOfKmersBySeed('#'.repeat(l), json) ;
 }
+
 
 exports.commonKmersArray = function (l, json1, json2) {
     var kmers1 = exports.arrayOfKmersByLength(l, json1) ;
