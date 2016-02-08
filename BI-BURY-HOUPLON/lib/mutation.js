@@ -52,11 +52,3 @@ exports.printMutation = function (i, json) {
     console.log('>'+json_mutated.sequences[0].id) ;
     console.log(json_mutated.sequences[0].sequence+'\n') ;
 }
-
-    /*
-     * fonction qui crée un fichier fasta dans path2 à partir d'un fichier fasta path1 dont la séquence a subi i mutations.
-     */
-exports.exportMutation = function (i, path1, path2) {
-    json_mutated = randomMutation (i, path1) ;
-    parser.jsonObjectToFastaFile(json_mutated) ;
-}

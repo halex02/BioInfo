@@ -48,10 +48,12 @@ exports.arrayOfKmersByLength = function (l, json) {
     return exports.arrayOfKmersBySeed('#'.repeat(l), json) ;
 }
 
-
-exports.commonKmersArray = function (l, json1, json2) {
-    var kmers1 = exports.arrayOfKmersByLength(l, json1) ;
-    var kmers2 = exports.arrayOfKmersByLength(l, json2) ;
+/*
+ * commonKmersArray(kmers1, kmers2) : fonction qui prend deux tableaux de kmers et renvoie le tableau des kmers communs aux deux tableaux passés
+ * en paramètre.
+ * CU : ne pas éliminer les doublons dans les tableaux passés en paramètres, la fonction le fait elle-même.
+ */
+exports.commonKmersArray = function (kmers1, kmers2) {
     var common = [] ;
     
     for (var i = 0 ; i < kmers1.length ; i++)
@@ -60,31 +62,28 @@ exports.commonKmersArray = function (l, json1, json2) {
     return common ;
 }
 
-exports.commonKmersRatio = function (l, json1, json2) {
-    var kmers2 = exports.arrayOfKmersByLength(l, json2) ;
-    var common = exports.commonKmersArray(l, json1, json2) ;
+/*
+ * commonKmersRation(kmers1, kmers2) : prend 2 tableaux de kmers et renvoie le ratio des kmers du premier tableau qui sont également dans le second.
+ */
+exports.commonKmersRatio = function (kmers1, kmers2) {
+    var common = exports.commonKmersArray(kmers1, kmers2) ;
 
     return (common.length)/(kmers2.length) ;
 }
 
-
-exports.printListKmers = function(l, json) {
-    var kmers = exports.arrayOfKmersByLength(l, json) ;
-    
+/*
+ * printListKmers(kmers) : imprime le contenu du tableau de kmers passé en paramètre, à raison d'un kmers par ligne.
+ */
+exports.printListKmers = function(kmers) {
     for (var i = 0 ; i < kmers.length ; i++)
 	console.log(kmers[i]) ;
     console.log('\n') ;
 }
 
-exports.printCommonKmers = function (l, json1, json2) {
-    var common = exports.commonKmersArray(l, json1, json2) ;
-
-    for(var i = 0 ; i < common.length ; i++)
-	console.log(common[i]) ;
-    console.log('\n') ;
-}
-
-exports.printCommonKmersRatio = function (l, json1, json2) {
-    console.log(exports.commonKmersRatio(l, json1, json2)+'\n') ;
+/*
+ * printCommonKmersRatio(kmers1, kmers2) : imprime le ratio des kmers du premier tableau qui sont également dans le second. 
+ */
+exports.printCommonKmersRatio = function (kmers1, kmers2) {
+    console.log(exports.commonKmersRatio(kmers1, kmers2)+'\n') ;
 }
 

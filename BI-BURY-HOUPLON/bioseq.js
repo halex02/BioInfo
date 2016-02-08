@@ -6,6 +6,7 @@ const fasta = require('./lib/fasta.js') ; //partie 1
 const kmers = require('./lib/kmers.js') ; //partie 2
 const mutation = require('./lib/mutation.js') ; //partie 3
 const windows = require('./lib/windows.js') ;
+const parser = require('./lib/fastaParser.js') ;
 
 /*
  * Erreur renvoyée si le tableau argv ne contient pas un nombre suffisant de paramètre.
@@ -40,15 +41,41 @@ case 'print-fasta-stats' :
     break ;
 
 case 'list-kmers' :
-    kmers.printListKmers(argv[3], argv[4]) ; //cf kmers.js
+    kmers.printListKmers(kmers.arrayOfKmersByLength(argv[3],
+						    parser.fastaFileToJsonObject(argv[4]))) ; //cf kmers.js
     break ;
 
+case 'list-spaced-kmers' :
+    kmers.printListKmers(kmers.arrayOfKmersBySeed(argv[3],
+						    parser.fastaFileToJsonObject(argv[4]))) ;
+    break ;
+    
 case 'common-kmers' :
-    kmers.printCommonKmers(argv[3], argv[4], argv[5]) ; //cf. kmers.js
+    kmers.printListKmers(kmers.commonKmersArray(kmers.arrayOfKmersByLength(argv[3],
+									   parser.fastaFileToJsonObject(argv[4])),
+						kmers.arrayOfKmersByLength(argv[3],
+									   parser.fastaFileToJsonObject(argv[5])))) ;
     break ;
 
+case 'common-spaced-kmers' :
+    kmers.printListKmers(kmers.commonKmersArray(kmers.arrayOfKmersBySeed(argv[3],
+									 parser.fastaFileToJsonObject(argv[4])),
+						kmers.arrayOfKmersBySeed(argv[3],
+									 parser.fastaFileToJsonObject(argv[5])))) ;
+    break ; 
+    
 case 'ratio-common-kmers' :
-    kmers.printCommonKmersRatio(argv[3], argv[4], argv[5]) ; //cf. kmers.js
+    kmers.printCommonKmersRatio(kmers.arrayOfKmersByLength(argv[3],
+							   parser.fastaFileToJsonObject(argv[4])),
+				kmers.arrayOfKmersByLength(argv[3],
+							   parser.fastaFileToJsonObject(argv[5]))) ; //cf. kmers.js
+    break ;
+
+case 'ratio-common-spaced-kmers' :
+    kmers.printCommonKmersRatio(kmers.arrayOfKmersBySeed(argv[3],
+							 parser.fastaFileToJsonObject(argv[4])),
+				kmers.arrayOfKmersBySeed(argv[3],
+							 parser.fastaFileToJsonObject(argv[5]))) ; //cf. kmers.js
     break ;
     
 case 'random-mutations' :
