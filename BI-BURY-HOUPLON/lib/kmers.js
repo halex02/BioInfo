@@ -11,13 +11,13 @@ exports.sequenceToKmers = function(seq, regex, n) {
     var res = new Array(n) ;
     var j = 0 ;
     while (regex.lastIndex <= seq.length-n) {
-	var traitement = regex.exec(seq) ;
-	res[j]='';
-	for (var i = 1 ; i <= n ; i++) {
-	    res[j]+=traitement[i] ;
-	}
-	regex.lastIndex = traitement.index+1 ;
-	j++ ;
+    	var traitement = regex.exec(seq) ;
+    	res[j]='';
+    	for (var i = 1 ; i <= n ; i++) {
+    	    res[j]+=traitement[i] ;
+	    }
+    	regex.lastIndex = traitement.index+1 ;
+    	j++ ;
     }
     return res ;
 }

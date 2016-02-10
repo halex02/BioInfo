@@ -1,28 +1,28 @@
 const parser = require('./fastaParser.js') ;
 const kmerer = require('./kmer.js');
+const seedObj = require('./graine.js') ;
 
 /*
+donne une suite de bout de sequence de longueur l, un kmer ou une fenètre
  * adaptation de arrayOfKmers pour fonctionner avec un string au lieu d'un path et la gestion d'un pas suppérieur à 1.
  */
 var arrayOfKmersWithAWindow = function (l, sequence, shift = 1) {
     var kmers_array = [] ;
-    
-    var aux = function (seq, i, arr) {
-		var index_debut = 0 ;
-		var index_fin = i ;
-		
-		while(index_fin <= seq.length){
-		    arr.push(seq.slice(index_debut, index_fin))
-		    index_debut += shift;
-		    index_fin += shift;
-			};
-    };
-	aux(sequence, l, kmers_array);
+
+	var index_debut = 0 ;
+	var index_fin = l ;
+	
+	while(index_fin <= sequence.length){
+	    kmers_array.push(sequence.slice(index_debut, index_fin));//prend toute la longueur et la push dans le tableau
+	    index_debut += shift;//avance dans la sequence
+	    index_fin += shift;
+	};
+
     return kmers_array ;
 }
 
 /*
- * adaptation de commonKmersArray pour fonctionner avec des string au lieu des paths.
+ * adaptation de commonKmersArray pour fonctionner avec des string au lieu des paths. donne 
  */
 var commonKmersArrayWithAWindow = function (l, fenetre, sequence) {
     var kmers1 = arrayOfKmersWithAWindow(l, fenetre) ;
@@ -36,7 +36,7 @@ var commonKmersArrayWithAWindow = function (l, fenetre, sequence) {
 }
 
 /*
- * adaptation de commonkmersRation pour fonctionner avec des strings à la place des paths.
+ * adaptation de commonkmersRation pour fonctionner avec des strings à la place des paths. donne le ratio de kmer de longueur l commun entre la séquence et la fenetre
  */
 var commonkmersRatioWithAWindow = function (l, fenetre, sequence){
 	var kmers2 = arrayOfKmersWithAWindow(l, sequence) ;
@@ -44,6 +44,37 @@ var commonkmersRatioWithAWindow = function (l, fenetre, sequence){
 
     return (common.length)/(kmers2.length) ;
 }
+/*--------------------------------------------------------------
+//donne un tableau de kmer à partir d'une graine et d'une séquence*/
+var arrayOfSpacedKmersWithAWindow = function (seed, sequence) {
+	var kmers_array = kmerer.sequenceToKmers(sequence, 
+    					   seedObj.seedToRegex(seed, seedObj.translate),
+						   seed.replace(/-/g, '').length);
+
+
+    return kmers_array ;
+}
+
+//donne un tableau des kmer seedé commun entre la séquence et la fenetre
+var commonSpacedKmersArrayWithAWindow = function (seed, fenetre, sequence) {
+    var kmers1 = arrayOfSpacedKmersWithAWindow(seed, fenetre) ;
+    var kmers2 = arrayOfSpacedKmersWithAWindow(seed, sequence) ;
+    var common = [] ;
+    
+    for (var i = 0 ; i < kmers1.length ; i++)
+	if (common.indexOf(kmers1[i])==(-1) && kmers2.indexOf(kmers1[i])!=(-1))
+	    common.push(kmers1[i]) ;
+    return common ;
+}
+
+//donne le ratio de kmer seedé de longueur l commun entre la séquence et la fenetre
+var commonSpacedkmersRatioWithAWindow = function (seed, fenetre, sequence){
+	var kmers2 = arrayOfSpacedKmersWithAWindow(seed, sequence) ;
+    var common = commonSpacedKmersArrayWithAWindow(seed, fenetre, sequence) ;
+
+    return (common.length)/(kmers2.length) ;
+}
+//--------------------------
 
 /*
  * affiche sur la sortie standart le résultat de la fonction window avec les coordonnés.
@@ -77,3 +108,38 @@ exports.mapperWindowsKmers = function (longueurWindow,shiftWindow,longueurKmer,s
 		queux +=shiftWindow;
 	}
 }
+
+exports.mapperWindowsSpacedKmers = function (longueurWindow,shiftWindow,graine,seuilKmer,pathRead,pathGenome){
+	var fenetres = arrayOfKmersWithAWindow (longueurWindow,parser.fastaFileToJsonObject(pathGenome),shiftWindow);
+	var ratio = 0.0;
+	var tete = 1;
+	var queux = longueur;
+	for each (fenetre in fenetres){
+		ratio = commonSpacedkmersRatioWithAWindow(graine,fenetre, pathread);
+		if (seuilKmer <= ratio) {
+			console.log(tete + ' ' + fenetre + ' ' + queux + '\n');
+		};
+		tete +=shiftWindow;
+		queux +=shiftWindow;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

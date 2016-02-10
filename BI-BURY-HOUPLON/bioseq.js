@@ -32,60 +32,68 @@ if (argv.length < 4)
     console.log(errorLength.message) ;
 
 switch(argv[2]){
-case 'print-fasta-sequences' :
-    fasta.printFastaSequences(argv[3]); //cf. fasta.js
-    break ;
-    
-case 'print-fasta-stats' :
-    fasta.printFastaStats(argv[3]); //cf. fasta.js
-    break ;
+    case 'print-fasta-sequences' :
+        fasta.printFastaSequences(argv[3]); //cf. fasta.js
+        break ;
+        
+    case 'print-fasta-stats' :
+        fasta.printFastaStats(argv[3]); //cf. fasta.js
+        break ;
 
-case 'list-kmers' :
-    kmers.printListKmers(kmers.arrayOfKmersByLength(argv[3],
-						    parser.fastaFileToJsonObject(argv[4]))) ; //cf kmers.js
-    break ;
+    case 'list-kmers' :
+        kmers.printListKmers(kmers.arrayOfKmersByLength(argv[3],
+    						    parser.fastaFileToJsonObject(argv[4]))) ; //cf kmers.js
+        break ;
 
-case 'list-spaced-kmers' :
-    kmers.printListKmers(kmers.arrayOfKmersBySeed(argv[3],
-						    parser.fastaFileToJsonObject(argv[4]))) ;
-    break ;
-    
-case 'common-kmers' :
-    kmers.printListKmers(kmers.commonKmersArray(kmers.arrayOfKmersByLength(argv[3],
-									   parser.fastaFileToJsonObject(argv[4])),
-						kmers.arrayOfKmersByLength(argv[3],
-									   parser.fastaFileToJsonObject(argv[5])))) ;
-    break ;
+    case 'list-spaced-kmers' :
+        kmers.printListKmers(kmers.arrayOfKmersBySeed(argv[3],
+    						    parser.fastaFileToJsonObject(argv[4]))) ;
+        break ;
+        
+    case 'common-kmers' :
+        kmers.printListKmers(kmers.commonKmersArray(kmers.arrayOfKmersByLength(argv[3],
+    									   parser.fastaFileToJsonObject(argv[4])),
+    						kmers.arrayOfKmersByLength(argv[3],
+    									   parser.fastaFileToJsonObject(argv[5])))) ;
+        break ;
 
-case 'common-spaced-kmers' :
-    kmers.printListKmers(kmers.commonKmersArray(kmers.arrayOfKmersBySeed(argv[3],
-									 parser.fastaFileToJsonObject(argv[4])),
-						kmers.arrayOfKmersBySeed(argv[3],
-									 parser.fastaFileToJsonObject(argv[5])))) ;
-    break ; 
-    
-case 'ratio-common-kmers' :
-    kmers.printCommonKmersRatio(kmers.arrayOfKmersByLength(argv[3],
-							   parser.fastaFileToJsonObject(argv[4])),
-				kmers.arrayOfKmersByLength(argv[3],
-							   parser.fastaFileToJsonObject(argv[5]))) ; //cf. kmers.js
-    break ;
+    case 'common-spaced-kmers' :
+        kmers.printListKmers(kmers.commonKmersArray(kmers.arrayOfKmersBySeed(argv[3],
+    									 parser.fastaFileToJsonObject(argv[4])),
+    						kmers.arrayOfKmersBySeed(argv[3],
+    									 parser.fastaFileToJsonObject(argv[5])))) ;
+        break ; 
+        
+    case 'ratio-common-kmers' :
+        kmers.printCommonKmersRatio(kmers.arrayOfKmersByLength(argv[3],
+    							   parser.fastaFileToJsonObject(argv[4])),
+    				kmers.arrayOfKmersByLength(argv[3],
+    							   parser.fastaFileToJsonObject(argv[5]))) ; //cf. kmers.js
+        break ;
 
-case 'ratio-common-spaced-kmers' :
-    kmers.printCommonKmersRatio(kmers.arrayOfKmersBySeed(argv[3],
-							 parser.fastaFileToJsonObject(argv[4])),
-				kmers.arrayOfKmersBySeed(argv[3],
-							 parser.fastaFileToJsonObject(argv[5]))) ; //cf. kmers.js
-    break ;
-    
-case 'random-mutations' :
-    mutation.printMutation(argv[3], argv[4]) ; //cf. mutation.js
-    break ;
+    case 'ratio-common-spaced-kmers' :
+        kmers.printCommonKmersRatio(kmers.arrayOfKmersBySeed(argv[3],
+                                                            parser.fastaFileToJsonObject(argv[4])),
+                                    kmers.arrayOfKmersBySeed(argv[3],
+                                    parser.fastaFileToJsonObject(argv[5]))) ; //cf. kmers.js
+        break ;
+        
+    case 'mapper-windows-spaced-kmer' :
+        windows.
+        break;
 
-case 'windows' :
-    windows.printWindows(argv[3], argv[4], argv[5]) ;
-    break ;
-    
-default:
-    console.log(errorUnknownCommand.message) ; //si l'utilisateur s'amuse à écrire n'importe quoi en paramètre, le programme plante.
+    case 'random-mutations' :
+        mutation.printMutation(argv[3], argv[4]) ; //cf. mutation.js
+        break ;
+
+    case 'windows' :
+        windows.printWindows(argv[3], argv[4], argv[5]) ;
+        break ;
+
+    case 'mapper-windows-kmer' :
+        windows.mapperWindowsKmers(argv[3],argv[4],argv[5],argv[6],argv[7],argv[8]) ;
+        break ;
+        
+    default:
+        console.log(errorUnknownCommand.message) ; //si l'utilisateur s'amuse à écrire n'importe quoi en paramètre, le programme plante.
 }
