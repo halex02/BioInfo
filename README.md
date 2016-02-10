@@ -6,3 +6,7 @@ Langage : javascript/Node.js
   * Parties 1 et 2 : faites et fonctionnelles  
   * Partie 3 : faite jusqu'à la question 11 qui ne marche pas à  cause d'un dépassement de pile (les mutations du virus ébola ne sont donc pas créées).  
   * Partie 4 : non faite.  
+
+##TP02 :
+  * partie 1 et 2 : faites
+  * partie 3 : non faites
