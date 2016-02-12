@@ -2,6 +2,8 @@ const parser = require('./fastaParser.js') ;
 const seed = require('./graine.js') ;
 const array = require('./array.js') ;
 
+//      /!\ devra traduire les séquence en majuscule, possibilité que des minuscule tombe aléatoirement dans certaine séquence.  /!\
+
 /*
  * sequenceToKmers(seq, regex, n) : prend une séquence de nucléotides, une regex pour la filtrer, la "taille" de la regex (que l'on peut obtenir,
  * comme la regex, à partir de la graine (il suffit de supprimer tous les '-' de la seed et de récupérer la longueur
@@ -75,9 +77,10 @@ exports.commonKmersRatio = function (kmers1, kmers2) {
  * printListKmers(kmers) : imprime le contenu du tableau de kmers passé en paramètre, à raison d'un kmers par ligne.
  */
 exports.printListKmers = function(kmers) {
-    for (var i = 0 ; i < kmers.length ; i++)
-	console.log(kmers[i]) ;
-    console.log('\n') ;
+    for (var i = 0 ; i < kmers.length ; i++){
+	    console.log(kmers[i]) ;
+        console.log('\n') ;
+    }
 }
 
 /*

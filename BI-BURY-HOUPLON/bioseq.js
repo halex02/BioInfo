@@ -8,6 +8,7 @@ const mutation = require('./lib/mutation.js') ; //partie 3
 const windows = require('./lib/windows.js') ;
 const parser = require('./lib/fastaParser.js') ;
 const matcheur = require('./lib/matcheur.js');
+const seed = require('./lib/graine.js');
 
 /*
  * Erreur renvoyée si le tableau argv ne contient pas un nombre suffisant de paramètre.
@@ -79,9 +80,9 @@ switch(argv[2]){
                                     parser.fastaFileToJsonObject(argv[5]))) ; //cf. kmers.js
         break ;
     case 'best-matches':
-        var tampon = argv[4];
-        if (is_int(tampon)) {
-            //faire de tampon une graine espacé
+        var tampon = argv[4];// comparaison pour accepter autant les type numéraire que les seed espacé en entré.
+        if (seed.is_int(tampon)) {
+            tampon = seed.numToSeed(tampon);
         }
         matcheur.printBestMatcheur(argv[3],tampon,argv[5],argv[6])
         break;
