@@ -7,6 +7,7 @@ const kmers = require('./lib/kmers.js') ; //partie 2
 const mutation = require('./lib/mutation.js') ; //partie 3
 const windows = require('./lib/windows.js') ;
 const parser = require('./lib/fastaParser.js') ;
+const matcheur = require('./lib/matcheur.js');
 
 /*
  * Erreur renvoyée si le tableau argv ne contient pas un nombre suffisant de paramètre.
@@ -77,9 +78,16 @@ switch(argv[2]){
                                     kmers.arrayOfKmersBySeed(argv[3],
                                     parser.fastaFileToJsonObject(argv[5]))) ; //cf. kmers.js
         break ;
-        
+    case 'best-matches':
+        var tampon = argv[4];
+        if (is_int(tampon)) {
+            //faire de tampon une graine espacé
+        }
+        matcheur.printBestMatcheur(argv[3],tampon,argv[5],argv[6])
+        break;
+
     case 'mapper-windows-spaced-kmer' :
-        windows.
+        windows.mapperWindowsSpacedKmers(argv[3],argv[4],argv[5],argv[6],argv[7],argv[8]);
         break;
 
     case 'random-mutations' :
