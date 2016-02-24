@@ -59,4 +59,3 @@ do
     node bioseq random-mutations 2 data/test1.fasta
 done
 
-

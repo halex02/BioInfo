@@ -79,12 +79,21 @@ switch(argv[2]){
                                     kmers.arrayOfKmersBySeed(argv[3],
                                     parser.fastaFileToJsonObject(argv[5]))) ; //cf. kmers.js
         break ;
+
     case 'best-matches':
         var tampon = argv[4];// comparaison pour accepter autant les type numéraire que les seed espacé en entré.
         if (seed.is_int(tampon)) {
             tampon = seed.numToSeed(tampon);
         }
-        matcheur.printBestMatcheur(argv[3],tampon,argv[5],argv[6])
+        matcheur.printBestMatcheur(argv[3],tampon,argv[5],argv[6]);
+        break;
+
+    case 'VJ-discover':
+        var tampon = argv[3];// comparaison pour accepter autant les type numéraire que les seed espacé en entré.
+        if (seed.is_int(tampon)) {
+            tampon = seed.numToSeed(tampon);
+        }
+        matcheur.printDiscover(tampon,argv[4],argv[5],argv[6]);
         break;
 
     case 'mapper-windows-spaced-kmer' :
