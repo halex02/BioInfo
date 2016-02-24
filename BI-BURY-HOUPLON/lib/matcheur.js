@@ -92,11 +92,14 @@ exports.printBestMatcheur = function (n, seed, pathRead, pathGerm) {
 	var table = bestMatcheurListeur(seed,pathRead,pathGerm);
 	for (var i = 0; i < table.length; i++) {
 		for (var j = 0; j < table[i].length && j < n; j++) {
-			console.log(table[i][j] + '\n');
+			console.log(table[i][j] + '\n');//manque encore d'indiquer le nom des séquence concerné.
 		}
 	}
 }
 
+/*
+	écrit pour chaque séquence trouvé dans pathRead, la meilleurs séquence V et J qui compose la dite séquence.
+*/
 exports.printDiscover = function (seed, pathRead, pathGermV, pathGermJ) {
 	// body...
 }
