@@ -39,19 +39,22 @@ var suffixArray = function(g){
 
 }
 
+
+}
+
 /*
 	print le retour de suffixArray en lui donnant le génome trouvé dans path
 */
 exports.printSuffixArray = function(path) {
-  var seq = parser.fastaFileToJsonObject(path).sequences ;
+  var seq = parser.fastaFileToJsonObject(path).sequences ;// un tableau de sequences de nucléotides
   
   for (var i = 0 ; i < seq.length ; i++) {
     var suffix = suffixArray(seq[i].sequence) ;
-    var str = suffix[0] ;    
+    var str = suffix[0] ;//création d'une chaine pour l'impression initialisé avec suffix[0]    
     for (var j = 1 ; j < suffix.length ; j++){
-     str+= ' '+suffix[i] ;
+     str+= ' '+suffix[i] ;//on boucle en séparant par un espace chaque entier
     }
-    console.log(str) ;
+    console.log(str) ;// on imprime la chaine contenant les indexes.
   }	
 }
 
