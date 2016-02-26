@@ -15,3 +15,13 @@ exports.naive_search = function(seq read) {
     return res ;
   }
 }
+
+/*
+	
+*/
+exports sufficArray = function(path){
+/*
+	
+*/
+
+}
