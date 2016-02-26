@@ -1,3 +1,5 @@
+const parser = require('./fastaParser.js') ;
+
 /*
  * recherche naive : prend une séquence de nucléotide, une lecture et cherche les occurences
  * de cette dernière dans la séquence. renvoie un tableau contenant les indices ou un tableau vide.
@@ -41,5 +43,15 @@ var suffixArray = function(g){
 	print le retour de suffixArray en lui donnant le génome trouvé dans path
 */
 exports.printSuffixArray = function(path) {
-	// body...
+  var seq = parser.fastaFileToJsonObject(path).sequences ;
+  
+  for (var i = 0 ; i < seq.length ; i++) {
+    var suffix = suffixArray(seq[i].sequence) ;
+    var str = suffix[0] ;    
+    for (var j = 1 ; j < suffix.length ; j++){
+     str+= ' '+suffix[i] ;
+    }
+    console.log(str) ;
+  }	
 }
+
