@@ -41,7 +41,8 @@ var suffixArray = function(g){
 	return compare(tableauSuf, tableauID);
 }
 
-
+var tri = function (tab) {
+  for(
 }
 
 /*
