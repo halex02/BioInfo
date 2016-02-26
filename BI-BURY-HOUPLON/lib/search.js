@@ -41,6 +41,10 @@ var suffixArray = function(g){
 	return compare(tableauSuf, tableauID);
 }
 
+var compare(tabStr,tabId){
+	
+}
+
 /*
 	print le retour de suffixArray en lui donnant le génome trouvé dans path
 */
