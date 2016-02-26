@@ -17,13 +17,23 @@ exports.naive_search = function(seq read) {
 }
 
 /*
-	calcule le tableau de suffixes du génome g
+	calcule le tableau de suffixes du génome g sous forme de string.
 	un tableau d'entier de chaque position du génome ordoné dans l'ordre lexicographique.
 */
-var=suffixArray = function(g){
+var suffixArray = function(g){
 /*
-	
+	créer un tableauSuf de String
+	créer un tableauID d'Int
+	pour chaque char de g
+		créer un string allant du début au char séléctionné
+		le rentre avec l'emplacement du char comme id dans la map
+	trier par ordre ortographique la map.
+	retourner le tableauID
 */
+	var tableauSuf = ["g"];
+	var tableauID = [0];
+
+
 
 }
 
