@@ -1,3 +1,17 @@
+/*
+ * recherche naive : prend une séquence de nucléotide, une lecture et cherche les occurences
+ * de cette dernière dans la séquence. renvoie un tableau contenant les indices ou un tableau vide.
+ */
 exports.naive_search = function(seq read) {
-	for (var i = 0 ; i < seq.length-read.length
+  var limit = seq.length-read.length ; // limite à ne pas dépasser dans les indices de la chaine pour éviter les débordements
+  var res = [] ;
+	for (var i = 0 ; i < limit ; i++) {
+    /*
+     * si la sous-chaine de seq débutant à l'indice i et de même longueur que read est identique à read, alors on renvoie i.
+     */
+    if (seq.substr(i, read.length)==read)
+      res.push(i) ;//ajoute le nouvel indice trouvé à la fin du tableau.
+    
+    return res ;
+  }
 }
