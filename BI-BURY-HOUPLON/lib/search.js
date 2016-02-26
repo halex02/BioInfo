@@ -3,11 +3,19 @@ exports.naive_search = function(seq read) {
 }
 
 /*
-	
+	calcule le tableau de suffixes du génome g
+	un tableau d'entier de chaque position du génome ordoné dans l'ordre lexicographique.
 */
-exports sufficArray = function(path){
+var=suffixArray = function(g){
 /*
 	
 */
 
+}
+
+/*
+	print le retour de suffixArray en lui donnant le génome trouvé dans path
+*/
+exports.printSuffixArray = function(path) {
+	// body...
 }
