@@ -32,11 +32,13 @@ var suffixArray = function(g){
 	trier par ordre ortographique la map.
 	retourner le tableauID
 */
-	var tableauSuf = ["g"];
-	var tableauID = [0];
-
-
-
+	var tableauSuf = [];
+	var tableauID = [];
+	for (var i = 0; i < g.length; i++) {
+		tableauSuf[i] = g.substring(i);
+		tableauID[i] = i;
+	}
+	return compare(tableauSuf, tableauID);
 }
 
 
