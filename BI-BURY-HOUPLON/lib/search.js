@@ -16,6 +16,8 @@ exports.naive_search = function(seq read) {
   }
 }
 
+exports.
+
 /*
 	
 */
