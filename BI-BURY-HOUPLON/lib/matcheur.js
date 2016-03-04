@@ -12,10 +12,11 @@ var matcheur = function (seqA, seqB, seed) {
 		compare et obtien le ratio et le nombre de kmer commun
 		retourne un tableau contenant séparément le ratio et le nombre de kmer commun.
 	*/
-	var tableA = kmerer.sequenceToKmers(seqA,graine.seedToRegex(seed, graine.translate),seed.replace(/-/g, '').length)});
-	var tableB = kmerer.sequenceToKmers(seqB,graine.seedToRegex(seed, graine.translate),seed.replace(/-/g, '').length)});
-	var retour[0] = kmerer.commonKmersRatio(tableA,tableB);
-	var retour[1] = (retour[0].length)/(tableB.length);
+	var retour = [];
+	var tableA = kmerer.sequenceToKmers(seqA,graine.seedToRegex(seed, graine.translate),seed.replace(/-/g, '').length);
+	var tableB = kmerer.sequenceToKmers(seqB,graine.seedToRegex(seed, graine.translate),seed.replace(/-/g, '').length);
+	retour[0] = kmerer.commonKmersRatio(tableA,tableB);
+	retour[1] = (retour[0].length)/(tableB.length);
 	return retour;
 }
 

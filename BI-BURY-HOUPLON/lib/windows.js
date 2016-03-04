@@ -1,12 +1,13 @@
 const parser = require('./fastaParser.js') ;
-const kmerer = require('./kmer.js');
+const kmerer = require('./kmers.js');
 const seedObj = require('./graine.js') ;
 
 /*
 donne une suite de bout de sequence de longueur l, un kmer ou une fenètre
  * adaptation de arrayOfKmers pour fonctionner avec un string au lieu d'un path et la gestion d'un pas suppérieur à 1.
  */
-var arrayOfKmersWithAWindow = function (l, sequence, shift = 1) {
+var arrayOfKmersWithAWindow = function (l, sequence, shift) {
+	var shift = typeof shift !== 'undefined' ? b : 1;
     var kmers_array = [] ;
 
 	var index_debut = 0 ;
@@ -83,7 +84,7 @@ exports.printWindows = function (longueur, shift, path) {
 	var fenetres = arrayOfKmersWithAWindow (longueur, parser.fastaFileToJsonObject(path), shift);
 	var tete = 1;
 	var queux = longueur;
-	for each (fenetre in fenetres){
+	for (fenetre in fenetres){
 		console.log(tete + ' ' + fenetre + ' ' + queux + '\n');
 		tete +=shift;
 		queux +=shift;
@@ -99,7 +100,7 @@ exports.mapperWindowsKmers = function (longueurWindow,shiftWindow,longueurKmer,s
 	var ratio = 0.0;
 	var tete = 1;
 	var queux = longueur;
-	for each (fenetre in fenetres){
+	for (fenetre in fenetres){
 		ratio = commonkmersRatioWithAWindow(longueurKmer,fenetre, pathread);
 		if (seuilKmer <= ratio) {
 			console.log(tete + ' ' + fenetre + ' ' + queux + '\n');
@@ -114,7 +115,7 @@ exports.mapperWindowsSpacedKmers = function (longueurWindow,shiftWindow,graine,s
 	var ratio = 0.0;
 	var tete = 1;
 	var queux = longueur;
-	for each (fenetre in fenetres){
+	for (fenetre in fenetres){
 		ratio = commonSpacedkmersRatioWithAWindow(graine,fenetre, pathread);
 		if (seuilKmer <= ratio) {
 			console.log(tete + ' ' + fenetre + ' ' + queux + '\n');

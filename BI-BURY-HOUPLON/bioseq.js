@@ -9,6 +9,7 @@ const windows = require('./lib/windows.js') ;
 const parser = require('./lib/fastaParser.js') ;
 const matcheur = require('./lib/matcheur.js');
 const seed = require('./lib/graine.js');
+const looker = require('./lib/search.js');
 
 /*
  * Erreur renvoyée si le tableau argv ne contient pas un nombre suffisant de paramètre.
@@ -79,6 +80,10 @@ switch(argv[2]){
                                     kmers.arrayOfKmersBySeed(argv[3],
                                     parser.fastaFileToJsonObject(argv[5]))) ; //cf. kmers.js
         break ;
+
+    case 'suffix-array' :
+        looker.printSuffixArray(argv[3]);
+        break;
 
     case 'best-matches':
         var tampon = argv[4];// comparaison pour accepter autant les type numéraire que les seed espacé en entré.
