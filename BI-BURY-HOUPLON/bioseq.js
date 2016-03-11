@@ -60,6 +60,10 @@ switch(argv[2]){
     									   parser.fastaFileToJsonObject(argv[5])))) ;
         break ;
 
+    case 'bwt' : 
+        looker.printBwt(argv[3]);
+        break;
+
     case 'common-spaced-kmers' :
         kmers.printListKmers(kmers.commonKmersArray(kmers.arrayOfKmersBySeed(argv[3],
     									 parser.fastaFileToJsonObject(argv[4])),
