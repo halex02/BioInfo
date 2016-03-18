@@ -65,7 +65,7 @@ switch(argv[2]){
         if (argv[4] != null) {
             tampon = argv[4]
         }
-        looker.printBwt(argv[3]);
+        looker.printBwt(argv[3], tampon);
         break;
 
     case 'common-spaced-kmers' :
