@@ -115,7 +115,7 @@ var invertBwt = function (bwt) {
 		}
 	}
 
-	return table[0];//revert la table[0] et retirer le $
+	return table[0].reverse().pop();//revert la table[0] puis retire le dernier élément (normalement le $)
 }
 
 /*
