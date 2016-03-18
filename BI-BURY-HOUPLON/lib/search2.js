@@ -93,11 +93,15 @@ exports.printInvertBwt = function(bwt){
 }
 
 /*
-	print la bwt des génome trouvé dans path.
+	print les num premier char de la bwt des génome trouvé dans path. si num vaux -1, sort toute la bwt.
 */
-exports.printBwt = function(path){
+exports.printBwt = function(path, num){
 	var seqs = parser.fastaFileToJsonObject(path).sequences;
-	for (var i = 0; i < seqs.length; i++) {
+	var lim = num;
+	if (num == -1) {
+		lim = seqs.length
+	}
+	for (var i = 0; i < lim; i++) {
 		console.log(bwter(seqs[i].sequence.toUpperCase()));	
 	}
 }

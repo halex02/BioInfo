@@ -61,6 +61,10 @@ switch(argv[2]){
         break ;
 
     case 'bwt' : 
+        var tampon = -1;
+        if (argv[4] != null) {
+            tampon = argv[4]
+        }
         looker.printBwt(argv[3]);
         break;
 

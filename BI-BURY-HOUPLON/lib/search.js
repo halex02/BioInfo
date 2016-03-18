@@ -126,9 +126,13 @@ exports.printInvertBwt = function(bwt){
 /*
 	print la bwt des génome trouvé dans path.
 */
-exports.printBwt = function(path){
+exports.printBwt = function(path, num){
 	var seqs = parser.fastaFileToJsonObject(path).sequences;
-	for (var i = 0; i < seqs.length; i++) {
+	var lim = num;
+	if (num == -1) {
+		lim = seqs.length
+	}
+	for (var i = 0; i < lim; i++) {
 		console.log(bwter(seqs[i].sequence.toUpperCase()));	
 	}
 }
