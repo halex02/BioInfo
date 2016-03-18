@@ -1,2 +1,2 @@
 #! /usr/bin/env bash
-node bioseq bwt data/phage-lambda.fasta 9
+node bioseq bwt data/phage-lambda.fasta 10
