@@ -5,8 +5,53 @@ function invertBwt(argument) {
 	// body...
 }
 
-function bwter(argument) {
-	// body...
+/*
+	version opti de rotater
+	ne retourne que les id
+*/
+var rotater = function (g){
+	/*
+		rajoute $
+		créer un tableau d'int
+		pour chaque char de g
+			créer un string allant du char séléctionné à la fin du g plus le début de g jusqu'au char séléctionné
+			le rentre avec l'emplacement du char comme id dans la map
+		trier par ordre ortographique la map.
+		retourner le tableauID
+	*/
+	var table=[];
+	for (var i = 0; i < g.length; i++) {
+		table[i] = i;
+	}
+	table.sort(function(a, b) {
+		var gauche = g.substring(a)+g.substring(0,a-1);
+		var droite = g.substring(b)+g.substring(0,b-1);
+		if (gauche>droite){
+			return 1;
+		} else if(droite>gauche){
+			return -1;
+		} else {
+			return 0;
+		}
+	});
+	return table;
+}
+
+/*
+	version ne faisant pas appel à une rotation complète du génome.
+
+*/
+function bwter(g) {
+	var table = rotater(g + '$');
+	var str = '';
+	for (var i = 0;i<table.length;i++){
+		if (table[i] <= 0) {
+			str += g[g.length-1];
+		} else{
+			str += g[table[i]-1];	
+		}
+	}
+	return str;
 }
 
 /*
@@ -25,7 +70,6 @@ function suffixArray(argument) {
 		retourner le tableauID
 	*/
 	var table=[];
-	var retour=[];
 	for (var i = 0; i < g.length; i++) {
 		table[i] = {"id": i, "suff":g.substring(i)};
 	}

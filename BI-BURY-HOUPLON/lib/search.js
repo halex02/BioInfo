@@ -29,7 +29,6 @@ var suffixArray = function(g){
 		retourner le tableauID
 	*/
 	var table=[];
-	var retour=[];
 	for (var i = 0; i < g.length; i++) {
 		table[i] = {"id": i, "suff":g.substring(i)};
 	}
@@ -59,7 +58,6 @@ var rotater = function (g){
 		retourner le tableauID
 	*/
 	var table=[];
-	var retour=[];
 	for (var i = 0; i < g.length; i++) {
 		table[i] = {"id": i, "suff":g.substring(i)+g.substring(0,i-1)};
 	}
@@ -79,7 +77,7 @@ var rotater = function (g){
 	construit la BWT du génome g.
 */
 var bwter = function(g){
-	var table = rotater(g);
+	var table = rotater(g + '$');
 	var str = '';
 	for (var i = 0;i<table.length;i++){
 		str+=table[i].suff[table[i].suff.length-1];

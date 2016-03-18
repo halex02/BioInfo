@@ -9,7 +9,7 @@ const windows = require('./lib/windows.js') ;
 const parser = require('./lib/fastaParser.js') ;
 const matcheur = require('./lib/matcheur.js');
 const seed = require('./lib/graine.js');
-const looker = require('./lib/search.js');
+const looker = require('./lib/search2.js');
 
 /*
  * Erreur renvoyée si le tableau argv ne contient pas un nombre suffisant de paramètre.
